@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"migrate":"sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
@@ -33,5 +34,8 @@
     "helpers": "app/helpers/",
     "constants": "app/constants/",
     "routes": "app/routes"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
   }
 }

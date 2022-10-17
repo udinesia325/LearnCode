@@ -10,7 +10,7 @@ class App extends Route {
         app.use(device.capture());
         
         // register router
-        app.use('/', super.init())
+        app.use('/api', super.init())
         
         app.use('*',(req,res) =>{
             res.send({
