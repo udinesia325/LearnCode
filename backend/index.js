@@ -3,10 +3,12 @@ const device = require('express-device');
 const { Route } = require('cores/Route')
 const { app } = require('./app')
 const { repo } = require('./config')
+
 class App extends Route {
     init() {
         const port = process.env.PORT || 4000
         app.use(device.capture());
+        
         // register router
         app.use('/', super.init())
         

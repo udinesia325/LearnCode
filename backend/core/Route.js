@@ -1,16 +1,16 @@
 const Express = require('express')
 const { log } = require('middleware/logging')
+
 /*
  * example require controller
- *  const ExampleController = require("controllers/example.controller.js")
- *
  */
+const ExampleController = require("controllers/example.controller.js")
 
 const router = Express.Router()
 class Route {
     init() {
         return [
-            // this.get('/some/path/:appId', (req, res, next) => new ExampleController(req, res,next).index()),
+            this.get('/', (req, res, next) => new ExampleController(req, res,next).index()),
             
         ]
     }
