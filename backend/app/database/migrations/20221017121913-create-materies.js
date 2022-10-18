@@ -15,6 +15,13 @@ module.exports = {
             lesson_id: {
                 type: Sequelize.BIGINT,
             },
+            slug: {
+                type: Sequelize.STRING,
+								unique:true
+            },
+            title: {
+                type: Sequelize.STRING,
+            },
             content: {
                 type: Sequelize.TEXT,
             },

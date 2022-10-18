@@ -1,8 +1,8 @@
 "use strict"
-const { timestamps } = require("helpers/underscore_timestamp")
 const { Model } = require("sequelize")
+const {timestamps} = require("helpers/underscore_timestamp")
 module.exports = (sequelize, DataTypes) => {
-    class materies extends Model {
+    class thumbnails extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -12,19 +12,17 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     }
-    materies.init(
+    thumbnails.init(
         {
-            user_id: DataTypes.INTEGER,
-            lesson_id: DataTypes.INTEGER,
-            content: DataTypes.TEXT,
+            url: DataTypes.TEXT,
+            materi_id: DataTypes.INTEGER,
         },
         {
             sequelize,
-            modelName: "materies",
+            modelName: "thumbnails",
             underscored: true,
-            ...timestamps,
+						...timestamps
         }
     )
-    return materies
+    return thumbnails
 }
-

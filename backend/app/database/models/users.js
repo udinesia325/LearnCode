@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const {timestamps} = require('helpers/underscore_timestamp');
 module.exports = (sequelize, DataTypes) => {
   class users extends Model {
     /**
@@ -23,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'users',
     underscored: true,
+			...timestamps
   });
   return users;
 };
