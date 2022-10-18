@@ -1,5 +1,5 @@
-const Express = require("express")
-const { log } = require("middleware/logging")
+const Express = require('express')
+const log = require('middleware/log')
 
 /*
  * example require controller
@@ -22,7 +22,8 @@ class Route {
             ),
         ]
     }
-
+    
+    
     // eslint-disable-next-line class-methods-use-this
     get(...args) {
         // add middleware log

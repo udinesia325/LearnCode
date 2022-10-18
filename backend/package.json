@@ -34,7 +34,9 @@
     "helpers": "app/helpers/",
     "constants": "app/constants/",
     "routes": "app/routes",
-		"models":"app/database/models"
+    "models": "app/database/models/",
+    "migrations": "app/database/migrations/",
+    "providers" : "app/providers/"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
