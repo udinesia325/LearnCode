@@ -1,5 +1,5 @@
 const Express = require('express')
-const { log } = require('providers/middleware')
+const log = require('middleware/log')
 
 /*
  * example require controller

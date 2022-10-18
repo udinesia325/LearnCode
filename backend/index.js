@@ -1,14 +1,16 @@
 require('module-alias/register')
+
 const device = require('express-device');
 const { Route } = require('cores/Route')
 const { app } = require('./app')
 const { repo } = require('./config')
+const env = require("helpers/env")
+const port = env("PORT") || 4000
 
 class App extends Route {
     init() {
-        const port = process.env.PORT || 4000
-        app.use(device.capture());
         
+        app.use(device.capture());
         // register router
         app.use('/api', super.init())
         
@@ -18,6 +20,7 @@ class App extends Route {
                 github : repo.github
             })
         })
+        
         app.listen(port, () => {
             console.log(`Server running on port ${port}`)
         })
