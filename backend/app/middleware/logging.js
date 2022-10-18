@@ -3,4 +3,4 @@ const log = (req) => {
     console.log(`[${time}] => ${req.originalUrl}`)
 }
 
-module.exports = log
+module.exports = { log }

@@ -1,4 +1,4 @@
-const env = require("helpers/env")
+const env = require("../../helpers/env")
 
 require("dotenv").config()
 module.exports = {

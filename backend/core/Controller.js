@@ -7,7 +7,7 @@ class Controller {
 
         next()
     }
-    
+
     /**
      * Success Response
      * @param {JSON} data

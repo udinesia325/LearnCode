@@ -33,10 +33,7 @@
     "middleware": "app/middleware/",
     "helpers": "app/helpers/",
     "constants": "app/constants/",
-    "routes": "app/routes",
-    "models": "app/database/models/",
-    "migrations": "app/database/migrations/",
-    "providers" : "app/providers/"
+    "routes": "app/routes"
   },
   "devDependencies": {
     "sequelize-cli": "^6.5.1"
