@@ -1,5 +1,5 @@
-const Express = require('express')
-const log = require('middleware/log')
+const Express = require("express")
+const log = require("middleware/log")
 
 /*
  * example require controller
@@ -14,7 +14,10 @@ class Route {
             this.get("/", (req, res, next) =>
                 new ExampleController(req, res, next).index()
             ),
-						this.get("/:lesson/:slug", (req, res, next) =>
+            this.get("/lessons/:lesson", (req, res, next) =>
+                new LessonsController(req, res, next).findLesson()
+            ),
+            this.get("/lessons/:lesson/:slug", (req, res, next) =>
                 new LessonsController(req, res, next).findWithMateries()
             ),
             this.get("/lessons", (req, res, next) =>
@@ -22,8 +25,7 @@ class Route {
             ),
         ]
     }
-    
-    
+
     // eslint-disable-next-line class-methods-use-this
     get(...args) {
         // add middleware log
