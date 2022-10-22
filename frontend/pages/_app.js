@@ -1,7 +1,16 @@
-import '../styles/globals.css'
+import Head from "next/head"
+import Layout from "../components/Layout"
+import "../styles/style.css"
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+    return (
+        <>
+            <Head></Head>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </>
+    )
 }
 
 export default MyApp
