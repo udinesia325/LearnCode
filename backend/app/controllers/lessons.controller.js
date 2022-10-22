@@ -6,7 +6,7 @@ class LessonsController extends Controller {
         // example call request and response
         const { request, response } = this
         const data = await models.lessons.findAll({
-            attributes: ["name", "description"],
+            attributes: ["name", "description","image"],
         })
         this.success(data)
     }
@@ -34,7 +34,7 @@ class LessonsController extends Controller {
     }
     async findLesson() {
         const { request } = this
-        const data = await models.lessons.findAll({
+        const data = await models.lessons.findOne({
             attributes: ["name"],
             where: {
                 name: request.params.lesson,
@@ -45,7 +45,6 @@ class LessonsController extends Controller {
             },
         })
 
-        console.log(this)
         this.success(data)
     }
 }
