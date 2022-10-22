@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "sequelize-cli db:migrate"
+    "migrate": "sequelize-cli db:migrate",
+		"seed":"sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
@@ -36,7 +37,7 @@
     "routes": "app/routes",
     "models": "app/database/models/",
     "migrations": "app/database/migrations/",
-    "providers" : "app/providers/"
+    "providers": "app/providers/"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
