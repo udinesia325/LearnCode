@@ -1,6 +1,5 @@
-const env = require("helpers/env")
+const env = require("../../helpers/env")
 
-require("dotenv").config()
 module.exports = {
     development: {
         username: env("DB_USERNAME"),
