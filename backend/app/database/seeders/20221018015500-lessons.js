@@ -16,12 +16,28 @@ module.exports = {
             {
                 name: "reactjs",
                 description: "framework for building user interface",
+                image: "images/lessons/react.png",
                 created_at: new Date(),
                 updated_at: new Date(),
             },
             {
                 name: "html",
                 description: "hypertext markup language",
+                image: "images/lessons/html.png",
+                created_at: new Date(),
+                updated_at: new Date(),
+            },
+            {
+                name: "javascript",
+                description: "Fullstack Programming Language",
+                image: "images/lessons/javascript.png",
+                created_at: new Date(),
+                updated_at: new Date(),
+            },
+            {
+                name: "laravel",
+                description: "Framework for php artisan",
+                image: "images/lessons/laravel.png",
                 created_at: new Date(),
                 updated_at: new Date(),
             },
@@ -35,5 +51,6 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
+        await queryInterface.bulkDelete("lessons", null, {})
     },
 }
