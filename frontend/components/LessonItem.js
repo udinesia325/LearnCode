@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default function LessonItem({ name, description, image }) {
+export default function LessonItem({ name, description, image, href }) {
     return (
         <div className="item">
             <Image
@@ -12,7 +12,7 @@ export default function LessonItem({ name, description, image }) {
             />
             <h2>{name}</h2>
             <p>{description}</p>
-            <Link href={`/lesson/${name}`}>
+            <Link href={href}>
                 <a className="download_btn">Baca Yuk</a>
             </Link>
         </div>

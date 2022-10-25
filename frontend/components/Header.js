@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
@@ -11,7 +12,6 @@ export default function Header() {
             }}
         >
             <p align="center" style={{ margin: "0" }}>
-                <img id="main_img" src="images/apps_games_main.png" />
             </p>
             <h1
                 id="main_title"
@@ -102,7 +102,7 @@ export default function Header() {
                 }}
                 onmouseover="btn_title_show('Some information about this website')"
                 onmouseout="btn_title_show('')"
-                onclick="about_dialog_show()"
+                onClick="about_dialog_show()"
             >
                 <span
                     style={{
