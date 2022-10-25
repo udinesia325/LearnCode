@@ -17,6 +17,8 @@ module.exports = (sequelize, DataTypes) => {
             user_id: DataTypes.INTEGER,
             lesson_id: DataTypes.INTEGER,
             content: DataTypes.TEXT,
+            slug: DataTypes.STRING,
+            title: DataTypes.STRING,
         },
         {
             sequelize,
@@ -27,4 +29,3 @@ module.exports = (sequelize, DataTypes) => {
     )
     return materies
 }
-

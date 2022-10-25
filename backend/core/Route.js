@@ -14,6 +14,12 @@ class Route {
             this.get("/", (req, res, next) =>
                 new ExampleController(req, res, next).index()
             ),
+            this.get("/materies", (req, res, next) =>
+                new LessonsController(req, res, next).allMateries()
+            ),
+						this.get("/materies/:slug", (req, res, next) =>
+                new LessonsController(req, res, next).materiWithSlug()
+            ),
             this.get("/lessons/:lesson", (req, res, next) =>
                 new LessonsController(req, res, next).findLesson()
             ),

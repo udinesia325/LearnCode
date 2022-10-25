@@ -6,7 +6,7 @@ class LessonsController extends Controller {
         // example call request and response
         const { request, response } = this
         const data = await models.lessons.findAll({
-            attributes: ["name", "description","image"],
+            attributes: ["name", "description", "image"],
         })
         this.success(data)
     }
@@ -35,7 +35,7 @@ class LessonsController extends Controller {
     async findLesson() {
         const { request } = this
         const data = await models.lessons.findOne({
-            attributes: ["name"],
+            attributes: ["name", "image"],
             where: {
                 name: request.params.lesson,
             },
@@ -45,6 +45,30 @@ class LessonsController extends Controller {
             },
         })
 
+        this.success(data)
+    }
+    async allMateries() {
+        const data = await models.materies.findAll({
+            attributes: ["slug"],
+            include: {
+                model: models.lessons,
+                attributes: ["name"],
+            },
+        })
+        this.success(data)
+    }
+    async materiWithSlug() {
+        const { slug } = this.request.params
+        const data = await models.materies.findOne({
+            attributes: ["title", "slug", "content", "created_at"],
+            where: {
+                slug,
+            },
+            include: {
+                model: models.users,
+                attributes: ["name"],
+            },
+        })
         this.success(data)
     }
 }
