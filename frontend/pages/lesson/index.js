@@ -20,6 +20,7 @@ export default function Lessons({ data }) {
                             name={data.name}
                             description={data.description}
                             image={data.image}
+                            href={"/lesson/" + data.name}
                         />
                     ))}
             </div>

@@ -2,6 +2,7 @@ import LessonItem from "../../../components/LessonItem"
 import LessonLayout from "../../../components/LessonLayout"
 
 export default function Lesson({ result }) {
+		const {name} = result.data
 		if(result.data.materies.length == 0){
 				return <p>Materi Akan Segera Kami Rilis :)</p>
 		}
@@ -10,9 +11,10 @@ export default function Lesson({ result }) {
             {result.data.materies?.map((materi, index) => (
                 <LessonItem
                     key={index}
-                    name={`${index}# ${result.data.name}`}
+                    name={`${index}# ${name}`}
                     description={materi.title}
-                    image={"images/lessons/react.png"}
+                    image={result.data.image}
+										href={`/lesson/${name}/${materi.slug}`}
                 />
             ))}
         </LessonLayout>
