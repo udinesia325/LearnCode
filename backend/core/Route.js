@@ -6,6 +6,7 @@ const log = require("middleware/log")
  */
 const ExampleController = require("controllers/example.controller.js")
 const LessonsController = require("controllers/lessons.controller.js")
+const createLessonValidation = require("../app/middleware/createLessonValidation")
 
 const router = Express.Router()
 class Route {
@@ -17,7 +18,7 @@ class Route {
             this.get("/materies", (req, res, next) =>
                 new LessonsController(req, res, next).allMateries()
             ),
-						this.get("/materies/:slug", (req, res, next) =>
+            this.get("/materies/:slug", (req, res, next) =>
                 new LessonsController(req, res, next).materiWithSlug()
             ),
             this.get("/lessons/:lesson", (req, res, next) =>
@@ -29,6 +30,9 @@ class Route {
             this.get("/lessons", (req, res, next) =>
                 new LessonsController(req, res, next).index()
             ),
+            this.post("/lesson", createLessonValidation, (req, res, next) =>
+                new LessonsController(req, res, next).createLesson()
+            ),
         ]
     }
 
@@ -37,6 +41,19 @@ class Route {
         // add middleware log
         args.push(log)
         return router.get(...args)
+    }
+    // eslint-disable-next-line class-methods-use-this
+    post(...args) {
+        // add middleware log
+        args.push(log)
+        return router.post(...args)
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    delete(...args) {
+        // add middleware log
+        args.push(log)
+        return router.delete(...args)
     }
 }
 

@@ -1,4 +1,5 @@
 const Controller = require("cores/Controller")
+const { validationResult } = require("express-validator")
 const models = require("models")
 
 class LessonsController extends Controller {
@@ -71,6 +72,28 @@ class LessonsController extends Controller {
         })
         this.success(data)
     }
+    async createLesson() {
+        const errors = validationResult(this.request)
+        if (!errors.isEmpty()) {
+            return this.error(errors)
+        }
+        const { request } = this
+        const { name, description } = request.body
+        const isExist = await this.existLesson(name)
+        if (isExist) {
+            return this.error("Lesson Telah Ada")
+        }
+        const data = await models.lessons.create({ name, description })
+        return this.success(data, "Berhasil menambahkan lessson baru ")
+    }
+    async existLesson(name) {
+        return (await models.lessons.findOne({
+            where: {
+                name,
+            },
+        }))
+            ? true
+            : false
+    }
 }
-
 module.exports = LessonsController
