@@ -1,5 +1,6 @@
 "use strict"
 const { faker } = require("@faker-js/faker/locale/id_ID")
+const bcryptjs = require("bcryptjs")
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -15,9 +16,13 @@ module.exports = {
          */
         const users = []
         for (let i = 0; i <= 5; i++) {
+            const name = faker.name.firstName()
+            const salt = await bcryptjs.genSalt(10)
             users.push({
                 uid: +new Date(),
                 name: faker.name.firstName(),
+                password: await bcryptjs.hash(name, salt),
+                role_id: 2,
                 photo: faker.image.unsplash.people(),
                 email: faker.email,
                 email_verified_at: new Date(),

@@ -1,4 +1,7 @@
 "use strict"
+const {faker} = require("@faker-js/faker/locale/id_ID")
+const bcryptjs = require("bcryptjs")
+require("dotenv").config()
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,14 +15,20 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
          */
-        await queryInterface.bulkInsert("user_roles", [
+        const salt = await bcryptjs.genSalt(10)
+        const password = await bcryptjs.hash(
+            process.env.DEFAULT_ADMIN_PASSWORD,
+            salt
+        )
+        await queryInterface.bulkInsert("users", [
             {
-                user_id: 1,
-                role_id: 2,
-            },
-            {
-                user_id: 2,
+                uid: +new Date(),
+                name: process.env.DEFAULT_ADMIN_USERNAME,
+                password: password,
                 role_id: 1,
+                photo: faker.image.unsplash.people(),
+                email: process.env.DEFAULT_ADMIN_EMAIL,
+                email_verified_at: new Date(),
             },
         ])
     },
@@ -31,7 +40,5 @@ module.exports = {
          * Example:
          * await queryInterface.bulkDelete('People', null, {});
          */
-
-        await queryInterface.bulkDelete("user_roles", null, {})
     },
 }
