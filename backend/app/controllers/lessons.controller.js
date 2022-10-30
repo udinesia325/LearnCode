@@ -48,30 +48,6 @@ class LessonsController extends Controller {
 
         this.success(data)
     }
-    async allMateries() {
-        const data = await models.materies.findAll({
-            attributes: ["slug"],
-            include: {
-                model: models.lessons,
-                attributes: ["name"],
-            },
-        })
-        this.success(data)
-    }
-    async materiWithSlug() {
-        const { slug } = this.request.params
-        const data = await models.materies.findOne({
-            attributes: ["title", "slug", "content", "created_at"],
-            where: {
-                slug,
-            },
-            include: {
-                model: models.users,
-                attributes: ["name"],
-            },
-        })
-        this.success(data)
-    }
     async createLesson() {
         const errors = validationResult(this.request)
         if (!errors.isEmpty()) {
