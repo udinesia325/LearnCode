@@ -17,6 +17,10 @@ class AuthController extends Controller {
             where: {
                 email,
             },
+            include: {
+                attributes: ["name"],
+                model: models.roles,
+            },
         })
         if (!user) {
             return this.error("", "email atau password salah", 400)
@@ -25,7 +29,11 @@ class AuthController extends Controller {
         if (!isVerify) {
             return this.error("", "email atau password salah", 400)
         }
-        const token = await createToken({ id: user.id, name: user.name })
+        const token = await createToken({
+            id: user.id,
+            name: user.name,
+            role: user.role.name,
+        })
         return this.success({ name: user.name, token }, "berhasil login")
     }
 }

@@ -46,9 +46,12 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
+db.users.belongsTo(db.roles)
+
 db.materies.belongsTo(db.users)
 db.materies.belongsTo(db.lessons)
 db.materies.hasMany(db.thumbnails)
+
 
 db.lessons.hasMany(db.materies)
 module.exports = db

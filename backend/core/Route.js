@@ -12,6 +12,7 @@ const AuthController = require("controllers/auth.controller")
 const loginValidation = require("../app/middleware/loginValidation")
 const createMateriValidation = require("../app/middleware/createMateriValidation")
 const decodeToken = require("../app/middleware/decodeToken")
+const adminOnly = require("../app/middleware/adminOnly")
 
 const router = Express.Router()
 class Route {
@@ -23,11 +24,29 @@ class Route {
             this.get("/materies", (req, res, next) =>
                 new MateriesController(req, res, next).allMateries()
             ),
-            this.post("/materies", decodeToken ,createMateriValidation, (req, res, next) =>
-                new MateriesController(req, res, next).create()
+            this.post(
+                "/materies",
+                decodeToken,
+                createMateriValidation,
+                (req, res, next) =>
+                    new MateriesController(req, res, next).create()
             ),
             this.get("/materies/:slug", (req, res, next) =>
                 new MateriesController(req, res, next).materiWithSlug()
+            ),
+            this.delete(
+                "/materies/:slug",
+                decodeToken,
+                adminOnly,
+                (req, res, next) =>
+                    new MateriesController(req, res, next).delete()
+            ),
+            this.patch(
+                "/materies/:slug",
+                decodeToken,
+                createMateriValidation,
+                (req, res, next) =>
+                    new MateriesController(req, res, next).update()
             ),
             this.get("/lessons/:lesson", (req, res, next) =>
                 new LessonsController(req, res, next).findLesson()
@@ -65,6 +84,12 @@ class Route {
         // add middleware log
         args.push(log)
         return router.delete(...args)
+    }
+    // eslint-disable-next-line class-methods-use-this
+    patch(...args) {
+        // add middleware log
+        args.push(log)
+        return router.patch(...args)
     }
 }
 
