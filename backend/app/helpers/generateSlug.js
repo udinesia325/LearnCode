@@ -1,13 +1,7 @@
 const { Op } = require("sequelize")
 const slugify = require("slugify")
 const models = require("models")
-const genSlug = (string) => {
-    const config = {
-        trim: true,
-        lower: true,
-    }
-    return slugify(string, config)
-}
+const genSlug = require("./genSlug")
 const regex = new RegExp("-{1}[0-9]+$")
 const generateSlug = async (string) => {
     let slug = genSlug(string)
