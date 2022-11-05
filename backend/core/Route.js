@@ -57,6 +57,9 @@ class Route {
             this.get("/lessons", (req, res, next) =>
                 new LessonsController(req, res, next).index()
             ),
+            this.delete("/lessons/:name", (req, res, next) =>
+                new LessonsController(req, res, next).delete()
+            ),
             this.post("/lesson", createLessonValidation, (req, res, next) =>
                 new LessonsController(req, res, next).createLesson()
             ),

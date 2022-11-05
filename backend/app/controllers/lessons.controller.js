@@ -71,5 +71,18 @@ class LessonsController extends Controller {
             ? true
             : false
     }
+    async delete() {
+        const { name } = this.request.params
+        if (!name) return this.error("", "slug tidak ada !")
+        try {
+            await models.lessons.destroy({
+                where: { name },
+            })
+            return this.success("", "berhasil di hapus")
+        } catch (err) {
+            console.log("delete error", err)
+            return this.error("", "internal server error", 500)
+        }
+    }
 }
 module.exports = LessonsController
