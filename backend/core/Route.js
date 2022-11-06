@@ -1,4 +1,5 @@
 const Express = require("express")
+const multer = require("multer")
 const log = require("middleware/log")
 
 /*
@@ -13,6 +14,8 @@ const loginValidation = require("../app/middleware/loginValidation")
 const createMateriValidation = require("../app/middleware/createMateriValidation")
 const decodeToken = require("../app/middleware/decodeToken")
 const adminOnly = require("../app/middleware/adminOnly")
+const fileUploader = require("../app/helpers/fileUploader")
+const fileSizeLimiter = require("../app/middleware/fileSizeLimiter")
 
 const router = Express.Router()
 class Route {
@@ -60,8 +63,13 @@ class Route {
             this.delete("/lessons/:name", (req, res, next) =>
                 new LessonsController(req, res, next).delete()
             ),
-            this.post("/lesson", createLessonValidation, (req, res, next) =>
-                new LessonsController(req, res, next).createLesson()
+            this.post(
+                "/lessons",
+                createLessonValidation,
+                fileUploader.single("image"),
+                fileSizeLimiter,
+                (req, res, next) =>
+                    new LessonsController(req, res, next).createLesson()
             ),
             this.post("/auth/login", loginValidation, (req, res, next) =>
                 new AuthController(req, res, next).login()

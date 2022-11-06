@@ -1,6 +1,11 @@
 const Controller = require("cores/Controller")
+const fs = require("fs")
 const { validationResult } = require("express-validator")
 const models = require("models")
+const fileUploader = require("../helpers/fileUploader")
+const multer = require("multer")
+const removeFile = require("../helpers/removeFile")
+const path = require("path")
 
 class LessonsController extends Controller {
     async index() {
@@ -49,18 +54,39 @@ class LessonsController extends Controller {
         this.success(data)
     }
     async createLesson() {
-        const errors = validationResult(this.request)
+        const { request, response } = this
+        //cek apalah ada error pada gambsr
+        if (request.imageError) {
+            return this.error("", request.imageError, 400)
+        }
+        const errors = validationResult(request)
         if (!errors.isEmpty()) {
             return this.error(errors)
         }
-        const { request } = this
+        //  console.log(request.file)
         const { name, description } = request.body
+        const image = request.file?.filename || "default.jpg"
         const isExist = await this.existLesson(name)
         if (isExist) {
+            if (request.file) {
+                removeFile(request.file.path)
+            }
             return this.error("Lesson Telah Ada")
         }
-        const data = await models.lessons.create({ name, description })
-        return this.success(data, "Berhasil menambahkan lessson baru ")
+        try {
+            const data = await models.lessons.create({
+                name,
+                description,
+                image,
+            })
+            return this.success(data, "Berhasil menambahkan lessson baru ")
+        } catch (err) {
+            if (request.file) {
+                removeFile(request.file.path)
+            }
+            console.log("create lessons error", e)
+            return this.error("", "internal server error")
+        }
     }
     async existLesson(name) {
         return (await models.lessons.findOne({
@@ -73,11 +99,27 @@ class LessonsController extends Controller {
     }
     async delete() {
         const { name } = this.request.params
-        if (!name) return this.error("", "slug tidak ada !")
+        if (!name) return this.error("", "nama lesson tidak ada !")
         try {
+            const oldData = await models.lessons.findOne({
+                where: { name },
+            })
+            if (!oldData) return this.error("", "lesson tidak ada")
             await models.lessons.destroy({
                 where: { name },
             })
+            ;("../../public/images/lessons")
+            removeFile(
+                path.join(
+                    __dirname,
+                    "..",
+                    "..",
+                    "public",
+                    "images",
+                    "lessons",
+                    oldData.image
+                )
+            )
             return this.success("", "berhasil di hapus")
         } catch (err) {
             console.log("delete error", err)
