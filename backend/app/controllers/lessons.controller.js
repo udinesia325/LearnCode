@@ -61,6 +61,7 @@ class LessonsController extends Controller {
         }
         const errors = validationResult(request)
         if (!errors.isEmpty()) {
+            removeFile(request.file.path)
             return this.error(errors)
         }
         //  console.log(request.file)

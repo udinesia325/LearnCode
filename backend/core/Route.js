@@ -60,14 +60,18 @@ class Route {
             this.get("/lessons", (req, res, next) =>
                 new LessonsController(req, res, next).index()
             ),
-            this.delete("/lessons/:name", (req, res, next) =>
-                new LessonsController(req, res, next).delete()
+            this.delete(
+                "/lessons/:name",
+                decodeToken,
+                adminOnly,
+                (req, res, next) =>
+                    new LessonsController(req, res, next).delete()
             ),
             this.post(
                 "/lessons",
-                createLessonValidation,
                 fileUploader.single("image"),
                 fileSizeLimiter,
+                createLessonValidation,
                 (req, res, next) =>
                     new LessonsController(req, res, next).createLesson()
             ),
