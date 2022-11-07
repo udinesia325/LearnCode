@@ -127,5 +127,77 @@ class LessonsController extends Controller {
             return this.error("", "internal server error", 500)
         }
     }
+    async update() {
+        const { request, response } = this
+        if (request.imageError) {
+            return this.error("", request.imageError, 400)
+        }
+        const errors = validationResult(request)
+        if (!errors.isEmpty()) {
+            removeFile(request.file.path)
+            return this.error(errors)
+        }
+        //  console.log(request.file)
+        const { name } = request.params
+        const oldData = await models.lessons.findOne({
+            where: {
+                name,
+            },
+        })
+        if (!oldData) {
+            // jika gak ada data lama maka hapus file yv terupload
+            if (request.file) {
+                removeFile(request.file.path)
+            }
+            return this.error("", "lesson tidak ada", 404)
+        }
+        let image = oldData.image
+        // jika ada file maka timpa yang lama
+        if (request.file) {
+            image = request.file.filename
+        }
+        // jika name lesson diganti maka cek apakah ada yang duplikat
+        if (oldData.name != request.body.name) {
+            if (await this.existLesson(request.body.name)) {
+                // hapus gambar yg terupload
+                if (request.file) {
+                    removeFile(request.file.path)
+                }
+                return this.error("", "lesson sudah ada", 400)
+            }
+        }
+        try {
+            await models.lessons.update(
+                {
+                    image,
+                    name: request.body.name,
+                    description: request.body.description,
+                },
+                {
+                    where: { name },
+                }
+            )
+
+            // hapus gambar lama
+            removeFile(
+                path.join(
+                    __dirname,
+                    "..",
+                    "..",
+                    "public",
+                    "images",
+                    "lessons",
+                    oldData.image
+                )
+            )
+            return this.success("", "berhasil di update")
+        } catch (err) {
+            console.log("update error", err)
+            if (request.file) {
+                removeFile(request.file.path)
+            }
+            return this.error("", "internal server error", 500)
+        }
+    }
 }
 module.exports = LessonsController

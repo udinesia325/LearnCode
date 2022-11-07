@@ -69,11 +69,21 @@ class Route {
             ),
             this.post(
                 "/lessons",
+                decodeToken,
                 fileUploader.single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
                 (req, res, next) =>
                     new LessonsController(req, res, next).createLesson()
+            ),
+            this.patch(
+                "/lessons/:name",
+                decodeToken,
+                fileUploader.single("image"),
+                fileSizeLimiter,
+                createLessonValidation,
+                (req, res, next) =>
+                    new LessonsController(req, res, next).update()
             ),
             this.post("/auth/login", loginValidation, (req, res, next) =>
                 new AuthController(req, res, next).login()
