@@ -26,6 +26,7 @@ module.exports = {
                 type: Sequelize.STRING,
             },
             email_verified_at: {
+                allowNull: true,
                 type: Sequelize.DATE,
             },
             role_id: {

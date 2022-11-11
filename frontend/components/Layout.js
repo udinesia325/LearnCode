@@ -1,20 +1,25 @@
 import { useRouter } from "next/router"
+import { useState } from "react"
 import Footer from "./Footer"
+import Header from "./Header"
 import Sidebar from "./Sidebar"
-
+import Container from "react-bootstrap/Container"
 export default function Layout(props) {
+    const [show, setShow] = useState(false)
     return (
         <div
-            id="header"
-            align="center"
+            className="d-flex flex-column justify-content-between"
             style={{
-                paddingTop: "100px",
-                paddingBottom: "100px",
+                width: "100vw",
+                height: "100vh",
             }}
         >
-            <center>{props.children}</center>
+            <Header show={show} setShow={setShow} />
+            <Container style={{ minHeight: "80vh" }}>
+                {props.children}
+            </Container>
             <Footer />
-            <Sidebar />
+            <Sidebar show={show} setShow={setShow} />
         </div>
     )
 }
