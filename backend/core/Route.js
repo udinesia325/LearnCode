@@ -16,6 +16,8 @@ const decodeToken = require("../app/middleware/decodeToken")
 const adminOnly = require("../app/middleware/adminOnly")
 const fileUploader = require("../app/helpers/fileUploader")
 const fileSizeLimiter = require("../app/middleware/fileSizeLimiter")
+const registerValidation = require("../app/middleware/registerValidation")
+const uidExist = require("../app/middleware/uidExist")
 
 const router = Express.Router()
 class Route {
@@ -70,7 +72,7 @@ class Route {
             this.post(
                 "/lessons",
                 decodeToken,
-                fileUploader.single("image"),
+                fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
                 (req, res, next) =>
@@ -79,7 +81,7 @@ class Route {
             this.patch(
                 "/lessons/:name",
                 decodeToken,
-                fileUploader.single("image"),
+                fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
                 (req, res, next) =>
@@ -87,6 +89,24 @@ class Route {
             ),
             this.post("/auth/login", loginValidation, (req, res, next) =>
                 new AuthController(req, res, next).login()
+            ),
+            this.post(
+                "/auth/register",
+                fileUploader("users").single("photo"),
+                fileSizeLimiter,
+                registerValidation,
+                (req, res, next) =>
+                    new AuthController(req, res, next).register()
+            ),
+            this.get(
+                "/auth/verify/:uid",
+                decodeToken,
+                adminOnly,
+                uidExist,
+                (req, res, next) => new AuthController(req, res, next).verify()
+            ),
+            this.get("/auth/users", decodeToken, adminOnly, (req, res, next) =>
+                new AuthController(req, res, next).index()
             ),
         ]
     }

@@ -1,9 +1,6 @@
 const Controller = require("cores/Controller")
-const fs = require("fs")
 const { validationResult } = require("express-validator")
 const models = require("models")
-const fileUploader = require("../helpers/fileUploader")
-const multer = require("multer")
 const removeFile = require("../helpers/removeFile")
 const path = require("path")
 
