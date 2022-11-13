@@ -1,17 +1,27 @@
 const Controller = require("cores/Controller")
 const { validationResult } = require("express-validator")
+const { parseURL } = require('helpers/formatter');
 const models = require("models")
 const removeFile = require("../helpers/removeFile")
 const path = require("path")
 
 class LessonsController extends Controller {
     async index() {
+      try {
         // example call request and response
         const { request, response } = this
-        const data = await models.lessons.findAll({
+        const rows = await models.lessons.findAll({
             attributes: ["name", "description", "image"],
         })
-        this.success(data)
+        
+        rows.forEach((row, i) => {
+          rows[i].image = parseURL(row.image)
+        })
+        
+        this.success(rows)
+      } catch (e) {
+        this.error(e.message)
+      }
     }
     async findWithMateries() {
         const { request, response } = this

@@ -1,10 +1,26 @@
+const { baseURL } = require("constants/url")
+
 /**
  * Cleaning url from query
  * @param {String} url
+ * @return {String}
  */
 const cleanUrl = (url) => encodeURI(url)
-//url.replace(/(\?.*)|(#.*)/g, '')
+
+/**
+ * Parse string to url
+ * @param {String} text
+ * @return {String}
+ */
+const parseURL = (text) => {
+  const exp = /^(\/)?(\w+(|\/|(\.*\.)|\w+)+)/
+  let match = text.match(exp)
+  let [, isFolder, path, extensionFile] = match
+  
+  return match ? `${ baseURL + (isFolder ? "" : "/") + path }` : text
+}
 
 module.exports = { 
-  cleanUrl
+  cleanUrl,
+  parseURL
 }
