@@ -18,6 +18,7 @@ const fileUploader = require("../app/helpers/fileUploader")
 const fileSizeLimiter = require("../app/middleware/fileSizeLimiter")
 const registerValidation = require("../app/middleware/registerValidation")
 const uidExist = require("../app/middleware/uidExist")
+const DashboardController = require("../app/controllers/dashboard.controller")
 
 const router = Express.Router()
 class Route {
@@ -25,6 +26,10 @@ class Route {
         return [
             this.get("/", (req, res, next) =>
                 new ExampleController(req, res, next).index()
+            ),
+            this.get(
+                "/dashboard",
+                (req, res, next) => new DashboardController(req, res, next)
             ),
             this.get("/materies", (req, res, next) =>
                 new MateriesController(req, res, next).allMateries()
