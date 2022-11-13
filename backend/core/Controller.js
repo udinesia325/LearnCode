@@ -30,12 +30,12 @@ class Controller {
      * @param {String} message
      * @param {Number} statusCode
      */
-    error(data, message = 'failed', statusCode = 500) {
+    error(message = 'failed', statusCode = 500) {
         const { response } = this
         const obj = {}
+        obj.code = statusCode
         obj.success = false
         obj.message = message
-        obj.data = data
 
         response.status(statusCode).json(obj)
     }

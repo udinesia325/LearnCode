@@ -25,5 +25,6 @@ module.exports = (sequelize, DataTypes) => {
             ...timestamps,
         }
     )
+    
     return lessons
 }

@@ -5,17 +5,20 @@ const { Route } = require('cores/Route')
 const { app } = require('./app')
 const { repo } = require('./config')
 const env = require("helpers/env")
-const port = env("PORT") || 4000
+const port = env("PORT", 4000)
 
 class App extends Route {
     init() {
         
-        app.use(device.capture());
+        app.use(device.capture())
+        
         // register router
         app.use('/api', super.init())
         
         app.use('*',(req,res) =>{
             res.send({
+                code: 404,
+                status: false,
                 message:'check our github for more info',
                 github : repo.github
             })
