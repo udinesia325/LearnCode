@@ -1,20 +1,26 @@
-import Image from "next/image"
 import Link from "next/link"
+import { Col, Card } from "react-bootstrap"
 
 export default function LessonItem({ name, description, image, href }) {
     return (
-        <div className="item">
-            <Image
-                src={`http://localhost:4000/${image}`}
-                width={"100px"}
-                height={"100px"}
-                placeholder={image}
-            />
-            <h2>{name}</h2>
-            <p>{description}</p>
-            <Link href={href}>
-                <a className="download_btn">Baca Yuk</a>
-            </Link>
-        </div>
+        <Col xs={6} md={3} lg={2}>
+            <Card className="shadow-sm" style={{ height: "20em" }}>
+                <Card.Img
+                    variant="top"
+                    src={`http://localhost:4000/images/lessons/${image}`}
+                />
+                <Card.Body>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>
+                        <span className="line-clamp">{description}</span>
+                        <Link href={href}>
+                            <a className="btn btn-info fw-bold text-white fs-6 w-100">
+                                Learn
+                            </a>
+                        </Link>
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+        </Col>
     )
 }

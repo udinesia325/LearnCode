@@ -1,29 +1,38 @@
 import LessonItem from "../../components/LessonItem"
+import { Row, Container } from "react-bootstrap"
+import {useState} from "react"
+import CustomBreadCrumbs from "../../components/CustomBreadCrumbs"
 
 export default function Lessons({ data }) {
+    const [filter,setFilter] = useState("")
+    const handleChange = e => {
+        setFilter(e.target.value)
+    }
     if (!data) {
         return <p>Loading...</p>
     }
     return (
         <>
+            <CustomBreadCrumbs />
             <input
                 type="text"
                 name="search_app"
+                onChange={handleChange}
+                value={filter}
                 placeholder="Search ..."
-                className="search_app"
+                className="form-control my-3"
             />
-            <div className="items_area">
+
+            <Row className="g-3">
                 {data.data &&
-                    data.data.map((data, index) => (
+                        data.data.filter( d => d.name.toLowerCase().includes(filter.toLowerCase())).map((data, index) => (
                         <LessonItem
                             key={index}
-                            name={data.name}
-                            description={data.description}
-                            image={data.image}
-                            href={"/lesson/" + data.name}
+                            {...data}
+                            href={"/lessons/" + data.name}
                         />
                     ))}
-            </div>
+            </Row>
         </>
     )
 }

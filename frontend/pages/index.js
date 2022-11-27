@@ -1,11 +1,11 @@
-import { Col, Row, Card } from "react-bootstrap"
+ import { Col, Row, Card } from "react-bootstrap"
 import Layout from "../components/Layout"
 import Link from "next/link"
 import Image from "next/image"
 export default function Home() {
     return (
         <>
-            <Row className="justify-content-center gap-5">
+            <Row className="justify-content-center gap-5 gap-y-4">
                 <Col xs={12} className="d-flex justify-content-center">
                     <Image
                         src="/images/apps_games_main.png"
@@ -19,33 +19,23 @@ export default function Home() {
                     </h1>
                 </Col>
             </Row>
-            <Row className="justify-content-evenly">
+            <Row className="g-3 mt-4">
                 <CardHome
-                    color="#3479AB"
                     href="/"
                     icon="fa fa-home"
                     title="Home"
                 />
                 <CardHome
-                    color="#4CAF50"
                     href="/lessons"
-                    icon="fa fa-rocket"
+                    icon="fa-solid fa-book"
                     title="Learn"
                 />
                 <CardHome
-                    color="#E91E63"
-                    href="/"
-                    icon="fa fa-gamepad"
-                    title="Sampel"
-                />
-                <CardHome
-                    color="#673AB7"
                     href="https://learncodeteam.blogspot.com"
                     icon="fa fa-newspaper-o"
-                    title="News"
+                    title="Blog"
                 />
                 <CardHome
-                    color="#FF9800"
                     href="/404"
                     icon="fa fa-user"
                     title="About"
@@ -56,23 +46,15 @@ export default function Home() {
 }
 function CardHome({ color, icon, href, title }) {
     return (
-        <Col xs={4} sm={3} md={2}>
-            <Card
-                style={{
-                    background: color,
-                    width: "100px",
-                    height: "100px",
-                }}
-            >
-                <Card.Body className="d-flex flex-column justify-content-center align-items-center">
+        <Col xs={6} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4">
+
                     <Link href={href}>
                         <a>
-                            <i className={`${icon} text-white fs-1`}></i>
+                            <i className={`${icon} text-dark`} style={{fontSize:"3em"}}></i>
                         </a>
                     </Link>
-                    <span className="text-white fw-bold">{title}</span>
-                </Card.Body>
-            </Card>
+                    <span className="fw-bold">{title}</span>
+
         </Col>
     )
 }

@@ -1,10 +1,16 @@
+import CustomBreadCrumbs from "../../../components/CustomBreadCrumbs"
 export default function LessonSlug({ result }) {
-    const { title, slug, content, created_at ,user} = result.data
+    const { title, slug, content, created_at, user } = result.data
     return (
         <>
+            <CustomBreadCrumbs />
+            <div className="d-flex flex-column gap-2">
+                <span><i className="fa-solid fa-file-pen"></i> Di tulis oleh : {user?.name}</span>
+
+                <span><i className="fa-regular fa-clock"></i> Dirilis : { new Date(created_at).toLocaleString()}</span>
+            </div>
             <h1>{title}</h1>
             <p>{content || ""}</p>
-            <p>Di Buat Pada {new Date(created_at).toLocaleString()} Oleh {user?.name}</p>
         </>
     )
 }
