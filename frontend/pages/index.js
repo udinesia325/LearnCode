@@ -1,11 +1,11 @@
  import { Col, Row, Card } from "react-bootstrap"
-import Layout from "../components/Layout"
+import {useRouter} from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 export default function Home() {
     return (
         <>
-            <Row className="justify-content-center gap-5 gap-y-4">
+            <Row className="justify-content-center gap-5 gap-y-4 mt-4">
                 <Col xs={12} className="d-flex justify-content-center">
                     <Image
                         src="/images/apps_games_main.png"
@@ -19,41 +19,40 @@ export default function Home() {
                     </h1>
                 </Col>
             </Row>
-            <Row className="g-3 mt-4">
-                <CardHome
-                    href="/"
-                    icon="fa fa-home"
-                    title="Home"
-                />
+            <Row className="g-3 mt-4 justify-content-center">
                 <CardHome
                     href="/lessons"
                     icon="fa-solid fa-book"
                     title="Learn"
+                    description="Pelajari banyak hal tentang programming disini"
                 />
                 <CardHome
                     href="https://learncodeteam.blogspot.com"
                     icon="fa fa-newspaper-o"
                     title="Blog"
+                    description="Jangan lewatkan postingan terbaru dari kami ! "
                 />
                 <CardHome
                     href="/404"
                     icon="fa fa-user"
                     title="About"
+                    description="Kenali lebih dalam tentang kami"
                 />
             </Row>
         </>
     )
 }
-function CardHome({ color, icon, href, title }) {
+function CardHome({ icon, href, title,description }) {
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(href)
+    }
     return (
-        <Col xs={6} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4">
+        <Col xs={11} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4 px-3 py-4 shadow rounded pointer bg-white" onClick={handleClick}>
 
-                    <Link href={href}>
-                        <a>
                             <i className={`${icon} text-dark`} style={{fontSize:"3em"}}></i>
-                        </a>
-                    </Link>
                     <span className="fw-bold">{title}</span>
+            <p className="text-center">{description}</p>
 
         </Col>
     )

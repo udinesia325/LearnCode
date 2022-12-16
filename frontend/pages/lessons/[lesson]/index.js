@@ -1,16 +1,16 @@
 import MateriesItem from "../../../components/MateriesItem"
-import Link from "next/link"
-import { Container, Row, Breadcrumb } from "react-bootstrap"
+import LessonEmpty from "../../../components/LessonEmpty.js";
+import { Container, Row } from "react-bootstrap"
 import CustomBreadCrumbs from "../../../components/CustomBreadCrumbs"
 export default function Lesson({ result }) {
     const { name } = result.data
     if (result.data.materies.length == 0) {
-        return <p>Materi Akan Segera Kami Rilis :)</p>
+        return <LessonEmpty />
     }
     return (
         <Container>
             <CustomBreadCrumbs />
-            <Row className="gap-3 mt-3">
+            <Row className="gap-3 mt-3 justify-content-center">
                 {result.data.materies.map((materi, index) => (
                     <MateriesItem key={index} head={`#${index + 1} ${name}`} title={materi.title} href={`/lessons/${name}/${materi.slug}`} />
                 ))}

@@ -12,7 +12,7 @@ const CustomBreadCrumbs = () => {
         }
         paths.push({ url: str || "/", text: router[i] || "Home" })
     }
-    const handleClick = (e,url) => {
+    const handleClick = (e, url) => {
         e.preventDefault()
         router.push(url)
     }
@@ -22,17 +22,17 @@ const CustomBreadCrumbs = () => {
                 if (index == paths.length - 1) {
                     return (
 
-                        <li className="breadcrumb-item active">
+                        <li key={index} className="breadcrumb-item active">
                             {path.text}
                         </li>
                     )
                 }
                 return (
-                        <li className={`breadcrumb-item`}>
-                            <Link href={path.url}>
-                                <a>{path.text}</a>
-                            </Link>
-                        </li>
+                    <li key={index} className={`breadcrumb-item`}>
+                        <Link href={path.url}>
+                            <a>{path.text}</a>
+                        </Link>
+                    </li>
                 )
             })}
         </Breadcrumb>

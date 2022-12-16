@@ -23,7 +23,7 @@ export default function Lessons({ data }) {
                 className="form-control my-3"
             />
 
-            <Row className="g-3">
+            <Row className="g-3 justify-content-center gap-y-3">
                 {data.data &&
                         data.data.filter( d => d.name.toLowerCase().includes(filter.toLowerCase())).map((data, index) => (
                         <LessonItem

@@ -1,23 +1,22 @@
-import React, { useState } from "react"
-import Button from "react-bootstrap/Button"
-import Offcanvas from "react-bootstrap/Offcanvas"
+import {Offcanvas} from "react-bootstrap"
+import Link from "next/link"
 
 function Sidebar({ show, setShow }) {
     const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
 
     return (
-        <>
-            <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas show={show} onHide={handleClose} style={{maxWidth:"80vw"}}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                    <Offcanvas.Title>LearnCode</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the
-                    elements you have chosen. Like, text, images, lists, etc.
+                    <div clasName="flex-column text-dark">
+                        <Link href="/">
+                            <a>Home</a>
+                        </Link>
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
-        </>
     )
 }
 

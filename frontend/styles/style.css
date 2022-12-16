@@ -1,7 +1,12 @@
 /* Google Fonts - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+/*custom breadcrumn divider*/
+:root{
+--bs-breadcrumb-divider: '>';
+}
 *{
-    font-family: "Poppins",sans-serif;
+    font-family: "Quicksand",sans-serif;
 }
 .line-clamp {
     display: -webkit-box;
@@ -13,4 +18,15 @@
 }
 a {
     text-decoration:none !important;
+}
+.pointer {
+    cursor:pointer;
+}
+.font-secondary{
+    font-family:'Poppins', 'sans-serif';
+}
+.materi-info{
+    font-size:.8em;
+    font-weight:500;
+    color:#666;
 }

@@ -1,10 +1,12 @@
 import Link from "next/link"
 import { Col, Card } from "react-bootstrap"
+import { useState } from "react";
 
 export default function LessonItem({ name, description, image, href }) {
+    const [isLoading , setIsLoading] = useState(false)
     return (
         <Col xs={6} md={3} lg={2}>
-            <Card className="shadow-sm" style={{ height: "20em" }}>
+            <Card className="shadow shadow-sm border border-0" >
                 <Card.Img
                     variant="top"
                     src={`http://localhost:4000/images/lessons/${image}`}
@@ -14,8 +16,8 @@ export default function LessonItem({ name, description, image, href }) {
                     <Card.Text>
                         <span className="line-clamp">{description}</span>
                         <Link href={href}>
-                            <a className="btn btn-info fw-bold text-white fs-6 w-100">
-                                Learn
+                            <a className="btn btn-info fw-bold text-white fs-6 w-100 mt-2" onClick={() => setIsLoading(true)}>
+                                {isLoading ? "Memuat ...":"Pelajari"}
                             </a>
                         </Link>
                     </Card.Text>

@@ -1,16 +1,14 @@
 import CustomBreadCrumbs from "../../../components/CustomBreadCrumbs"
+import { useEffect } from "react"
+
 export default function LessonSlug({ result }) {
-    const { title, slug, content, created_at, user } = result.data
+    const { title, content, created_at, user } = result.data
     return (
         <>
             <CustomBreadCrumbs />
-            <div className="d-flex flex-column gap-2">
-                <span><i className="fa-solid fa-file-pen"></i> Di tulis oleh : {user?.name}</span>
-
-                <span><i className="fa-regular fa-clock"></i> Dirilis : { new Date(created_at).toLocaleString()}</span>
-            </div>
-            <h1>{title}</h1>
-            <p>{content || ""}</p>
+            <h1 style={{ fontSize: "2.5em" }} className="font-secondary">{title}</h1>
+            <p className="fw-bold text-secondary" style={{ fontSize: '0.6em' }}>Penulis : {user.name} | {new Date(created_at).toLocaleDateString()}</p>
+            <p>{content}</p>
         </>
     )
 }

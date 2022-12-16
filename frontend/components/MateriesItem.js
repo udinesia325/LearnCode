@@ -6,7 +6,7 @@ export default function MateriesItem({ head, title,href }) {
     router.push(href)
   }
   return (
-    <Col xs={12} md={6}>
+    <Col xs={12} md={10}>
       <Card className="border-start border-top-0 border-bottom-0 border-end-0 border-info border-3 shadow-sm" onClick={handleClick}>
         <Card.Body>
           <Card.Title><h3>{head}</h3></Card.Title>
