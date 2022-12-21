@@ -1,4 +1,5 @@
 import { ListGroup, Offcanvas } from "react-bootstrap"
+import {useRouter} from "next/router"
 import Link from "next/link"
 const dataList = [
     {
@@ -19,7 +20,10 @@ const dataList = [
 ]
 function Sidebar({ show, setShow }) {
     const handleClose = () => setShow(false)
-
+    const router = useRouter()
+    if(router.asPath.startsWith("/admin")){
+        console.log("your'e admin")
+    }
     return (
         <Offcanvas show={show} onHide={handleClose} style={{ maxWidth: "80vw" }}>
             <Offcanvas.Header closeButton>
@@ -31,7 +35,7 @@ function Sidebar({ show, setShow }) {
                         dataList.map((data,index)=>(
                     <ListGroup.Item key={index} className="d-flex">
                         <Link href={data.href}>
-                            <a onClick={handleClose} className="text-dark fw-bold w-100"><i class={`me-4 ${data.icon}`}></i>{data.text}</a>
+                            <a onClick={handleClose} className="text-dark fw-bold w-100"><i className={`me-4 ${data.icon}`}></i>{data.text}</a>
                         </Link>
                     </ListGroup.Item>
 

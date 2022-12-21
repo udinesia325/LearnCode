@@ -19,7 +19,7 @@ export default function Lesson({ result }) {
     )
 }
 export async function getStaticPaths() {
-    const response = await fetch("http://localhost:4000/api/lessons")
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lessons`)
     const result = await response.json()
     const paths = result.data.map((lesson) => {
         return {
@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
     const response = await fetch(
-        `http://localhost:4000/api/lessons/${params.lesson}`
+        `${process.env.BACKEND_URL}/api/lessons/${params.lesson}`
     )
     const result = await response.json()
     return {

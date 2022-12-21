@@ -37,7 +37,7 @@ export default function Lessons({ data }) {
     )
 }
 export async function getStaticProps(ctx) {
-    const url = "http://localhost:4000/api/lessons"
+    const url = `${process.env.BACKEND_URL}/api/lessons`
     const response = await fetch(url)
     const data = await response.json()
     if (!data) {

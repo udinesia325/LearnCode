@@ -9,7 +9,7 @@ export default function LessonItem({ name, description, image, href }) {
             <Card className="shadow shadow-sm border border-0" >
                 <Card.Img
                     variant="top"
-                    src={`http://localhost:4000/images/lessons/${image}`}
+                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/lessons/${image}`}
                 />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>

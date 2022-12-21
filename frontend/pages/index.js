@@ -5,21 +5,21 @@ import Image from "next/image"
 export default function Home() {
     return (
         <>
-            <Row className="justify-content-center gap-5 gap-y-4 mt-4">
-                <Col xs={12} className="d-flex justify-content-center">
+            <Row className="justify-content-center mt-4 row-cols-1 row-cols-md-2">
+                <Col className="d-flex justify-content-center">
                     <Image
                         src="/images/apps_games_main.png"
                         width="250em"
                         height="200em"
                     />
                 </Col>
-                <Col xs={12}>
+                <Col className="d-flex justify-content-center align-items-center">
                     <h1 className="fs-1 text-center">
                         Learn Code - Your Guide Of Programming
                     </h1>
                 </Col>
             </Row>
-            <Row className="g-3 mt-4 justify-content-center">
+            <Row className="mt-4 justify-content-center gap-2">
                 <CardHome
                     href="/lessons"
                     icon="fa-solid fa-book"
@@ -50,7 +50,7 @@ function CardHome({ icon, href, title,description }) {
     return (
         <Col xs={11} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4 px-3 py-4 shadow rounded pointer bg-white" onClick={handleClick}>
 
-                            <i className={`${icon} text-dark`} style={{fontSize:"3em"}}></i>
+                            <i aria-hidden="true" className={`${icon} text-dark`} style={{fontSize:"3em"}}></i>
                     <span className="fw-bold">{title}</span>
             <p className="text-center">{description}</p>
 
