@@ -117,6 +117,9 @@ class AuthController extends Controller {
             return this.error("", "internal server error")
         }
     }
+    async me() {
+        return this.success(this.request.user)
+    }
 }
 
 module.exports = AuthController

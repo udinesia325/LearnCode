@@ -113,6 +113,7 @@ class Route {
             this.get("/auth/users", decodeToken, adminOnly, (req, res, next) =>
                 new AuthController(req, res, next).index()
             ),
+            this.post("/auth/me", decodeToken, (req, res, next) => new AuthController(req, res, next).me())
         ]
     }
 
