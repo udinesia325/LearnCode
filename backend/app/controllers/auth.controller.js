@@ -12,7 +12,7 @@ class AuthController extends Controller {
         const { request } = this
         const errors = validationResult(request)
         if (!errors.isEmpty()) {
-            return this.error(errors)
+            return this.error(errors, "email atau password salah", 400)
         }
         const { email, password } = request.body
         const user = await models.users.findOne({

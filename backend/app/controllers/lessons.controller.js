@@ -69,7 +69,7 @@ class LessonsController extends Controller {
             if (request.file) {
                 removeFile(request.file.path)
             }
-            return this.error("Lesson Telah Ada")
+            return this.error("", "Lesson Telah Ada", 400)
         }
         try {
             const data = await models.lessons.create({
@@ -77,7 +77,7 @@ class LessonsController extends Controller {
                 description,
                 image,
             })
-            return this.success(data, "Berhasil menambahkan lessson baru ")
+            return this.success(data, "Berhasil menambahkan lessson baru ", 201)
         } catch (err) {
             if (request.file) {
                 removeFile(request.file.path)
