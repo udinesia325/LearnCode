@@ -1,15 +1,17 @@
 import { Form } from "react-bootstrap"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
 import { setCookie } from "cookies-next"
-import cryptoJs from "crypto-js"
 import { useRouter } from "next/router"
 import encrypt from "../lib/encrypt"
+import { ToastContext } from "../context/ToastProvider"
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const router = useRouter()
+    const { notify } = useContext(ToastContext)
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
@@ -20,6 +22,7 @@ const Login = () => {
                 secure: true,
                 maxAge: 3600 * 24 //sehari
             })
+            notify("Selamat Datang Admin ! ")
             router.push("/admin")
         } catch (error) {
             setError(error.response.data.message)
