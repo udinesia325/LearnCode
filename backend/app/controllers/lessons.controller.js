@@ -97,12 +97,12 @@ class LessonsController extends Controller {
     }
     async delete() {
         const { name } = this.request.params
-        if (!name) return this.error("", "nama lesson tidak ada !")
+        if (!name) return this.error("", "nama lesson tidak ada !", 400)
         try {
             const oldData = await models.lessons.findOne({
                 where: { name },
             })
-            if (!oldData) return this.error("", "lesson tidak ada")
+            if (!oldData) return this.error("", "lesson tidak ada", 400)
             await models.lessons.destroy({
                 where: { name },
             })
