@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const LessonsTable = ({ index, name, image, description }) => {
+const LessonsTable = ({ index, name, image, description,handleDelete }) => {
     return (
         <tr>
             <td>{index + 1}</td>
@@ -9,12 +9,14 @@ const LessonsTable = ({ index, name, image, description }) => {
                 <Image
                     src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/lessons/${image}`}
                     alt={`${image}`}
-                    width={500}
-                    height={500}
+                    width={100}
+                    height={100}
                 />
             </td>
             <td>{description}</td>
-            <td>Table cell</td>
+            <td>
+                <button className="btn btn-sm btn-danger" onClick={handleDelete.bind(this,name)}>Delete</button>
+            </td>
         </tr>
     )
 }
