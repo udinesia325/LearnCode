@@ -56,7 +56,7 @@ const EditLesson = ({ data }) => {
         formData.append("description",initialData.description)
         // jika ada file maka tambahkan ke body
         if(file){
-            formData.append("file",file)
+            formData.append("image",file)
         }
         const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lessons/${data.name}`
         try{
