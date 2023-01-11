@@ -16,7 +16,7 @@ function Sidebar({ show, setShow }) {
     }else{
         setIsAdmin(false)
     }
-    },[])
+    },[router.asPath])
     return (
         <Offcanvas show={show} onHide={handleClose} style={{ maxWidth: "80vw" }}>
             <Offcanvas.Header closeButton>

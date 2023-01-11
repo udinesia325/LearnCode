@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const LessonsTable = ({ index, name, image, description,handleDelete }) => {
+const LessonsTable = ({ index, name, image, description,handleDelete,handleEdit }) => {
     return (
         <tr>
             <td>{index + 1}</td>
@@ -16,6 +16,7 @@ const LessonsTable = ({ index, name, image, description,handleDelete }) => {
             <td>{description}</td>
             <td>
                 <button className="btn btn-sm btn-danger" onClick={handleDelete.bind(this,name)}>Delete</button>
+                <button className="btn btn-sm btn-info" onClick={handleEdit.bind(this,name)}>Edit</button>
             </td>
         </tr>
     )
