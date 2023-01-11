@@ -23,14 +23,14 @@ const CustomBreadCrumbs = () => {
                     return (
 
                         <li key={index} className="breadcrumb-item active">
-                            {path.text}
+                            {decodeURIComponent(path.text)}
                         </li>
                     )
                 }
                 return (
                     <li key={index} className={`breadcrumb-item`}>
                         <Link href={path.url}>
-                            <a>{path.text}</a>
+                            <a>{decodeURIComponent(path.text)}</a>
                         </Link>
                     </li>
                 )
