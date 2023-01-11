@@ -3,6 +3,10 @@ const removeFile = (destination) => {
     if (destination.endsWith("default.jpg")) {
         return true
     }
-    fs.unlinkSync(destination)
+    try {
+        fs.unlinkSync(destination)
+    } catch (error) {
+        console.log(error)
+    }
 }
 module.exports = removeFile

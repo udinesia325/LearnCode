@@ -38,7 +38,7 @@ class LessonsController extends Controller {
     async findLesson() {
         const { request } = this
         const data = await models.lessons.findOne({
-            attributes: ["name", "image"],
+            attributes: ["name", "image", "description"],
             where: {
                 name: request.params.lesson,
             },
@@ -134,7 +134,7 @@ class LessonsController extends Controller {
             if (request.file) {
                 removeFile(request.file.path)
             }
-            return this.error(errors)
+            return this.error("", errors, 400)
         }
         //  console.log(request.file)
         const { name } = request.params
@@ -177,18 +177,20 @@ class LessonsController extends Controller {
                 }
             )
 
-            // hapus gambar lama
-            removeFile(
-                path.join(
-                    __dirname,
-                    "..",
-                    "..",
-                    "public",
-                    "images",
-                    "lessons",
-                    oldData.image
+            // hapus gambar lama jika ada gambar baru
+            if (oldData.image != image) {
+                removeFile(
+                    path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "public",
+                        "images",
+                        "lessons",
+                        oldData.image
+                    )
                 )
-            )
+            }
             return this.success("", "berhasil di update")
         } catch (err) {
             console.log("update error", err)
