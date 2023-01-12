@@ -19,6 +19,8 @@ const fileSizeLimiter = require("../app/middleware/fileSizeLimiter")
 const registerValidation = require("../app/middleware/registerValidation")
 const uidExist = require("../app/middleware/uidExist")
 const DashboardController = require("../app/controllers/dashboard.controller")
+const updateMateriValidation = require("../app/middleware/updateMateriValidation")
+const validationChecker = require("../app/middleware/validationChecker")
 
 const router = Express.Router()
 class Route {
@@ -54,7 +56,8 @@ class Route {
             this.patch(
                 "/materies/:slug",
                 decodeToken,
-                createMateriValidation,
+                updateMateriValidation,
+                validationChecker,
                 (req, res, next) =>
                     new MateriesController(req, res, next).update()
             ),
