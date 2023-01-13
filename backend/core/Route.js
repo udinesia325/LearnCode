@@ -40,6 +40,7 @@ class Route {
                 "/materies",
                 decodeToken,
                 createMateriValidation,
+                validationChecker,
                 (req, res, next) =>
                     new MateriesController(req, res, next).create()
             ),
@@ -83,6 +84,7 @@ class Route {
                 fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
+                validationChecker,
                 (req, res, next) =>
                     new LessonsController(req, res, next).createLesson()
             ),
@@ -92,10 +94,11 @@ class Route {
                 fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
+                validationChecker,
                 (req, res, next) =>
                     new LessonsController(req, res, next).update()
             ),
-            this.post("/auth/login", loginValidation, (req, res, next) =>
+            this.post("/auth/login", loginValidation, validationChecker, (req, res, next) =>
                 new AuthController(req, res, next).login()
             ),
             this.post(
@@ -103,6 +106,7 @@ class Route {
                 fileUploader("users").single("photo"),
                 fileSizeLimiter,
                 registerValidation,
+                validationChecker,
                 (req, res, next) =>
                     new AuthController(req, res, next).register()
             ),

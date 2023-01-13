@@ -52,16 +52,6 @@ class LessonsController extends Controller {
     }
     async createLesson() {
         const { request, response } = this
-        //cek apalah ada error pada gambsr
-        if (request.imageError) {
-            return this.error("", request.imageError, 400)
-        }
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            removeFile(request.file.path)
-            return this.error(errors)
-        }
-        //  console.log(request.file)
         const { name, description } = request.body
         const image = request.file?.filename || "default.jpg"
         const isExist = await this.existLesson(name)
@@ -102,7 +92,7 @@ class LessonsController extends Controller {
             const oldData = await models.lessons.findOne({
                 where: { name },
             })
-            if (!oldData) return this.error("", "lesson tidak ada", 400)
+            if (!oldData) return this.error("", "lesson tidak ada", 404)
             await models.lessons.destroy({
                 where: { name },
             })
@@ -126,17 +116,6 @@ class LessonsController extends Controller {
     }
     async update() {
         const { request, response } = this
-        if (request.imageError) {
-            return this.error("", request.imageError, 400)
-        }
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            if (request.file) {
-                removeFile(request.file.path)
-            }
-            return this.error("", errors, 400)
-        }
-        //  console.log(request.file)
         const { name } = request.params
         const oldData = await models.lessons.findOne({
             where: {
