@@ -8,9 +8,9 @@ function MyApp({ Component, pageProps }) {
     return (
         <Layout>
             <ToastProvider>
-            <ToastContainer />
-            <Component {...pageProps} />
-                </ToastProvider>
+                <ToastContainer />
+                <Component {...pageProps} />
+            </ToastProvider>
         </Layout>
     )
 }

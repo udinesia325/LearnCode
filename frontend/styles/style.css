@@ -30,3 +30,26 @@ a {
     font-weight:500;
     color:#666;
 }
+.ProseMirror{
+    border: 1px solid var(--bs-gray-400);
+    outline: none;
+    margin-top: 1em;
+    padding: .3em;
+    border-radius: 5px;
+}
+
+.editor_buttons {
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+.editor_buttons button {
+    border:none;
+    outline: none;
+    background-color: #ddd;
+    transition: all .3s ease-in-out;
+}
+.editor_buttons button.is-active {
+    background-color: #3c79f5;
+}

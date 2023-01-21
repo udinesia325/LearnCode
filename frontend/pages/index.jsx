@@ -1,5 +1,5 @@
- import { Col, Row, Card } from "react-bootstrap"
-import {useRouter} from "next/router"
+import { Col, Row, Card } from "react-bootstrap"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 export default function Home() {
@@ -42,7 +42,7 @@ export default function Home() {
         </>
     )
 }
-function CardHome({ icon, href, title,description }) {
+function CardHome({ icon, href, title, description }) {
     const router = useRouter()
     const handleClick = () => {
         router.push(href)
@@ -50,8 +50,8 @@ function CardHome({ icon, href, title,description }) {
     return (
         <Col xs={11} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4 px-3 py-4 shadow rounded pointer bg-white" onClick={handleClick}>
 
-                            <i aria-hidden="true" className={`${icon} text-dark`} style={{fontSize:"3em"}}></i>
-                    <span className="fw-bold">{title}</span>
+            <i aria-hidden="true" className={`${icon} text-dark`} style={{ fontSize: "3em" }}></i>
+            <span className="fw-bold">{title}</span>
             <p className="text-center">{description}</p>
 
         </Col>
