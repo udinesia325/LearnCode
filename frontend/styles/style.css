@@ -37,7 +37,12 @@ a {
     padding: .3em;
     border-radius: 5px;
 }
-
+.ProseMirror pre code {
+    background-color: rgb(33, 33, 33);
+    color: white;
+    padding: .5em;
+    border-radius: 5px;
+}
 .editor_buttons {
     margin-top: 1em;
     display: flex;
