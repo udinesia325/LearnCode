@@ -1,10 +1,10 @@
 import axios from "axios"
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Form } from "react-bootstrap"
 import dynamic from "next/dynamic"
-import {getCookie} from "cookies-next"
-import decrypt from "../../../../lib/decrypt.js" 
-import {useEditor} from "@tiptap/react"
+import { getCookie } from "cookies-next"
+import decrypt from "../../../../lib/decrypt.js"
+import { useEditor } from "@tiptap/react"
 import StarterKit from '@tiptap/starter-kit'
 import CustomEditor from "../../../../components/admin/CustomEditor.jsx"
 import useNotify from "../../../../hooks/useNotify.jsx"
@@ -14,7 +14,7 @@ import { useRouter } from "next/router.js"
 const Edit = ({ data }) => {
   const [title, setTitle] = useState(data.title)
   const [content, setContent] = useState(data.content)
-  const [token,setToken] = useState("")
+  const [token, setToken] = useState("")
   const notify = useNotify()
   const router = useRouter()
   useEffect(() => {
@@ -28,12 +28,12 @@ const Edit = ({ data }) => {
   })
   const handleSubmit = async e => {
     e.preventDefault()
-    const response = await axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/materies/${data.slug}`,{
-      title,content:editor.getHTML()
-    },{
+    const response = await axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/materies/${data.slug}`, {
+      title, content: editor.getHTML()
+    }, {
       headers: {
-      Authorization: `Bearer ${token}`,
-        }
+        Authorization: `Bearer ${token}`,
+      }
     })
     notify("Berhasil di update")
     router.push("/admin/materi")
