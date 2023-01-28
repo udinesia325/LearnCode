@@ -65,6 +65,9 @@ const Index = ({ data }) => {
                 </Modal.Footer>
             </Modal>
             <Row className="mb-3 justify-content-center">
+                <Col xs={12}>
+                    <Link href="/admin/materi/create" ><a className="btn btn-sm btn-success mt-3 mb-4">Buat Materi</a></Link>
+                </Col>
                 <Col xs={10} md={8} lg={5}>
                     <Form.Control value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Cari Materi" />
                 </Col>

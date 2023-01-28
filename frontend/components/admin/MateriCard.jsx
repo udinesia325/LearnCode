@@ -12,7 +12,7 @@ const MateriCard = ({ slug, lesson, handleDelete }) => {
                     <Card.Footer>
                         <Row className="row-cols-3 justify-content-evenly text-center">
                             <Col>
-                                <a href={`/lessons/${lesson.name}/${slug}`} target="_blank">
+                                <a href={`/lessons/${lesson.name}/${slug}`} target="_blank" rel="noopener noreferrer">
                                     <i className="fa-solid fa-eye"></i></a>
                             </Col>
 
