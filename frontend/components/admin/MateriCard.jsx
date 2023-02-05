@@ -4,10 +4,10 @@ import { useState } from "react"
 const MateriCard = ({ slug, lesson, handleDelete }) => {
     return (
         <>
-            <Col xs={12} md={4} lg={3} className="mb-3">
+            <Col xs={12} md={4} lg={3} className="mb-3 materi-card">
                 <Card>
                     <Card.Body>
-                        {slug}
+                        <h3>{slug}</h3>
                     </Card.Body>
                     <Card.Footer>
                         <Row className="row-cols-3 justify-content-evenly text-center">

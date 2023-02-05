@@ -76,7 +76,7 @@ const EditLesson = ({ data }) => {
     }
 
     return (
-            <div className="card border border-0 shadow shadow-sm px-2 mt-5 bg-white">
+        <div className="card border border-0 shadow shadow-sm px-2 mt-5 bg-white mx-auto" style={{maxWidth:"600px"}} >
                 <h2 className="mt-2 mb-4 text-center">Edit Lesson {data.name}</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">

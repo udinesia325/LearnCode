@@ -15,8 +15,8 @@ const LessonsTable = ({ index, name, image, description,handleDelete,handleEdit 
             </td>
             <td>{description}</td>
             <td>
-                <button className="btn btn-sm btn-danger" onClick={handleDelete.bind(this,name)}>Delete</button>
-                <button className="btn btn-sm btn-info" onClick={handleEdit.bind(this,name)}>Edit</button>
+                <button className="btn btn-sm btn-danger m-2" onClick={handleDelete.bind(this,name)}><i className="fa-solid fa-trash"></i></button>
+                <button className="btn btn-sm btn-info m-2" onClick={handleEdit.bind(this,name)}><i className="fa-solid fa-pen"></i></button>
             </td>
         </tr>
     )

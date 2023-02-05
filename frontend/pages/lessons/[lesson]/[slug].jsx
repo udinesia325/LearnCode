@@ -1,6 +1,11 @@
 import CustomBreadCrumbs from "../../../components/CustomBreadCrumbs"
+import hljs from "highlight.js"
+import { useEffect } from "react"
 
 export default function LessonSlug({ result }) {
+    useEffect(() => {
+        hljs.highlightAll()
+    }, [])
     const { title = '', content = '', created_at, user = { name: '' } } = result.data
     return (
         <>

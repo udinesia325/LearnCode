@@ -54,7 +54,7 @@ const Index = ({ data }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Peringatan !</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Apakah anda yakin ingin menghapush ? </Modal.Body>
+                <Modal.Body>Apakah anda yakin ingin menghapus ? </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Batal

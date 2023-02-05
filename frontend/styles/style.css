@@ -1,9 +1,11 @@
 /* Google Fonts - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 /*custom breadcrumn divider*/
 :root{
 --bs-breadcrumb-divider: '>';
+--source-code: 'Source Code Pro', monospace;
 }
 *{
     font-family: "Quicksand",sans-serif;
@@ -57,4 +59,38 @@ a {
 }
 .editor_buttons button.is-active {
     background-color: #3c79f5;
+}
+pre > code, section pre > code {
+    font-family: var(--source-code);
+}
+.card-admin-index a, .materi-card a {
+    color:inherit;
+}
+.materi-card .card ,
+.card-admin-index .card 
+{
+    border:none;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px #eee;
+    padding-bottom: 1em;
+}
+.materi-card .card-footer, 
+.card-admin-index .card-footer{
+    border:none;
+    background-color: white;
+}
+.md-left{
+    text-align: center;
+}
+
+@media only screen and (max-width:578px){
+.hero-text{
+    margin-top: 2em;
+}
+}
+@media only screen and (min-width:678px){
+    .md-left{
+        text-align: left;
+        font-weight: bold;
+    }
 }

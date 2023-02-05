@@ -1,10 +1,10 @@
 import LessonItem from "../../components/LessonItem"
 import { Row, Container } from "react-bootstrap"
-import {useState} from "react"
+import { useState } from "react"
 import CustomBreadCrumbs from "../../components/CustomBreadCrumbs"
 
 export default function Lessons({ data }) {
-    const [filter,setFilter] = useState("")
+    const [filter, setFilter] = useState("")
     const handleChange = e => {
         setFilter(e.target.value)
     }
@@ -20,12 +20,13 @@ export default function Lessons({ data }) {
                 onChange={handleChange}
                 value={filter}
                 placeholder="Search ..."
-                className="form-control my-3"
+                className="form-control my-3 mx-auto"
+                style={{ maxWidth: "600px" }}
             />
 
             <Row className="g-3 justify-content-center gap-y-3">
                 {data.data &&
-                        data.data.filter( d => d.name.toLowerCase().includes(filter.toLowerCase())).map((data, index) => (
+                    data.data.filter(d => d.name.toLowerCase().includes(filter.toLowerCase())).map((data, index) => (
                         <LessonItem
                             key={index}
                             {...data}

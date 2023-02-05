@@ -9,7 +9,7 @@ class LessonsController extends Controller {
         // example call request and response
         const { request, response } = this
         const data = await models.lessons.findAll({
-            attributes: ["name", "description", "image"],
+            attributes: ["id", "name", "description", "image"],
         })
         this.success(data)
     }

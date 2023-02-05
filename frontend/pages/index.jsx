@@ -5,16 +5,16 @@ import Image from "next/image"
 export default function Home() {
     return (
         <>
-            <Row className="justify-content-center mt-4 row-cols-1 row-cols-md-2">
-                <Col className="d-flex justify-content-center">
+            <Row className="justify-content-center mt-4">
+                <Col sm={5} className="d-flex justify-content-center">
                     <Image
                         src="/images/apps_games_main.png"
                         width="250em"
                         height="200em"
                     />
                 </Col>
-                <Col className="d-flex justify-content-center align-items-center">
-                    <h1 className="fs-1 text-center">
+                <Col sm={5} className="d-flex align-items-center hero-text">
+                    <h1 className="fs-1 md-left">
                         Learn Code - Your Guide Of Programming
                     </h1>
                 </Col>
@@ -48,7 +48,7 @@ function CardHome({ icon, href, title, description }) {
         router.push(href)
     }
     return (
-        <Col xs={11} md={4} className="d-flex flex-column justify-content-center align-items-center mb-4 px-3 py-4 shadow rounded pointer bg-white" onClick={handleClick}>
+        <Col xs={11} md={3} className="d-flex flex-column justify-content-center align-items-center mb-4 px-3 py-4 rounded pointer bg-white" onClick={handleClick}>
 
             <i aria-hidden="true" className={`${icon} text-dark`} style={{ fontSize: "3em" }}></i>
             <span className="fw-bold">{title}</span>
