@@ -40,6 +40,11 @@ npm start
 
 ## endpoint
 
+#### prefix
+ ```js
+ /api
+ ```
+
 - auth
   - [POST] /auth/login ( untuk mendapatkan token jwt )
     - body
@@ -56,7 +61,7 @@ npm start
       email: string,
       password: string
     ```
-    - [GET] /auth/verify/:uid (varifikasi user agar bisa masuk ke aplikasi , hanya boleh di lakukan oleh admin)
+    - [GET] /auth/verify/:uid (verifikasi user agar bisa masuk ke aplikasi , hanya boleh di lakukan oleh admin)
     - header 
       ```js
       {
@@ -68,7 +73,36 @@ npm start
 - materies
   - [GET] /materies  ( menampilkan semua materi yang tersedia)
   - [GET] /materies/:slug  (menampilkan sebuah materi berdasarkan slug)
-  - 
+  - [POST] /materies  ( membuat materi baru )
+    ```json
+        body {
+        lesson_id: integer,
+        title: string,
+        content: string
+         },
+        header {
+           Authorization: Bearer {TOKEN_JWT}
+        }
+      ```
+   - [DELETE] /materies/:slug  ( menghapus materi berdasarkan slug )
+    ```json
+      header {
+        Authorization: Bearer {TOKEN_JWT}
+      }
+    ```
+
+   - [PATCH] /materies/:slug  ( mengupdate sebuah materi )
+     ```json
+        body {
+         title:string,
+         content:string,
+         lesson_id: ?integer <untuk berpindah lesson>
+        }
+        header {
+          Authorization: Bearer {TOKEN_JWT}
+        }
+     ```
+
 - lessons
   - /lessons [GET] (daftar semua pelajaran)
   - /lessons/:lesson [GET] (detail suatu pelajaran)
