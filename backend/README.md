@@ -47,24 +47,32 @@ npm start
 
 - auth
   - [POST] /auth/login ( untuk mendapatkan token jwt )
-    - body
    ```js
-    {
+    body {
       email: string,
       password: string
     }
   ```
-  - [POST] /auth/register (buat user baru)
-    - body
+  - [GET] /auth/me (detail user yang sedang login)
+    ```json
+     header {
+        Authorization: bearer {TOKEN_JWT}
+      }
     ```
+  - [GET] /auth/users ( daftar semua user)
+  - [POST] /auth/register (buat user baru)
+    
+    ```json
+    body{
       name: string,
       email: string,
       password: string
+      }
     ```
     - [GET] /auth/verify/:uid (verifikasi user agar bisa masuk ke aplikasi , hanya boleh di lakukan oleh admin)
-    - header 
-      ```js
-      {
+
+      ```json      
+      header {
         Authorization: bearer {TOKEN_JWT}
       }
       ```
@@ -92,21 +100,53 @@ npm start
     ```
 
    - [PATCH] /materies/:slug  ( mengupdate sebuah materi )
-     ```json
-        body {
+     ```js
+      body {
          title:string,
          content:string,
          lesson_id: ?integer <untuk berpindah lesson>
         }
-        header {
+      header {
           Authorization: Bearer {TOKEN_JWT}
         }
-     ```
+      ```
+
 
 - lessons
-  - /lessons [GET] (daftar semua pelajaran)
-  - /lessons/:lesson [GET] (detail suatu pelajaran)
-  - /lessons/:lesson/:slug [GET] (materi dari sebuah pelajaran)
-  - /lesson [POST] (daftar pelajaran)
+  - [GET] /lessons (daftar semua pelajaran yang tersedia)
+  - [GET] /lessons/:lesson (detail suatu pelajaran)
+  - [GET] /lessons/:lesson/:slug (materi dari sebuah pelajaran bersarkan nama pelajaran dan slug)
+  - [POST] /lesson (membuat pelajaran baru)
+    ```json
+    body {
+      image: ?file,
+      name: string <required>,
+      description: string <required>,
+    }
+      header {
+          Authorization: Bearer {TOKEN_JWT}
+        }
+    ```
+  - [PATCH] /lesson (mengupdate pelajaran baru)
+    ```json
+    body {
+      image: ?file,
+      name: string <required>,
+      description: string <required>,
+    }
+      header {
+          Authorization: Bearer {TOKEN_JWT}
+        }
+    ```
+  - [DELETE] /lesson/:name (menghapus berdasarkan nama)
+
+##### silahkan di coba !
+
+salam titik koma and stay full js :v
+
+
+
+
+build with ❤️ by CodingTeam
 
 > © by our teams under MIT license
