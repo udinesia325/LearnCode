@@ -54,7 +54,7 @@ npm start
     }
   ```
   - [GET] /auth/me (detail user yang sedang login)
-    ```json
+    ```js
      header {
         Authorization: bearer {TOKEN_JWT}
       }
@@ -62,7 +62,7 @@ npm start
   - [GET] /auth/users ( daftar semua user)
   - [POST] /auth/register (buat user baru)
     
-    ```json
+    ```js
     body{
       name: string,
       email: string,
@@ -71,7 +71,7 @@ npm start
     ```
     - [GET] /auth/verify/:uid (verifikasi user agar bisa masuk ke aplikasi , hanya boleh di lakukan oleh admin)
 
-      ```json      
+      ```js 
       header {
         Authorization: bearer {TOKEN_JWT}
       }
@@ -82,7 +82,7 @@ npm start
   - [GET] /materies  ( menampilkan semua materi yang tersedia)
   - [GET] /materies/:slug  (menampilkan sebuah materi berdasarkan slug)
   - [POST] /materies  ( membuat materi baru )
-    ```json
+    ```js
         body {
         lesson_id: integer,
         title: string,
@@ -93,7 +93,7 @@ npm start
         }
       ```
    - [DELETE] /materies/:slug  ( menghapus materi berdasarkan slug )
-    ```json
+    ```js
       header {
         Authorization: Bearer {TOKEN_JWT}
       }
@@ -117,7 +117,7 @@ npm start
   - [GET] /lessons/:lesson (detail suatu pelajaran)
   - [GET] /lessons/:lesson/:slug (materi dari sebuah pelajaran bersarkan nama pelajaran dan slug)
   - [POST] /lesson (membuat pelajaran baru)
-    ```json
+    ```js
     body {
       image: ?file,
       name: string <required>,
@@ -128,7 +128,7 @@ npm start
         }
     ```
   - [PATCH] /lesson (mengupdate pelajaran baru)
-    ```json
+    ```js
     body {
       image: ?file,
       name: string <required>,
