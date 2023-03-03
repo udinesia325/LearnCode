@@ -9,15 +9,15 @@ function Header({ show, setShow }) {
     }
 
     return (
-        <Navbar variant="light" bg="light">
+        <Navbar variant="light" bg="white">
             <Container>
                 <Navbar.Brand
                     href="#"
-                    className="bx bx-menu"
+                    className="fa-solid fa-bars ms-3"
                     onClick={handleShow}
                 ></Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link href="#home" active>
+                    <Nav.Link href="/" active>
                         LearnCode
                     </Nav.Link>
                 </Nav>

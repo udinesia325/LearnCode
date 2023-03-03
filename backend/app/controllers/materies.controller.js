@@ -35,10 +35,6 @@ class MateriesController extends Controller {
     }
     async create() {
         const request = this.request
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            return this.error(errors, "failed", 400)
-        }
         const { title, content, lesson_id } = request.body
         const user_id = request.user.id
         const slug = await generateSlug(title)

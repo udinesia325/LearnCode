@@ -15,6 +15,16 @@ module.exports = {
          * }], {});
          */
         const users = []
+        const salt = await bcryptjs.genSalt(10)
+        users.push({
+            uid: +new Date(),
+            name: process.env.DEFAULT_ADMIN_USERNAME,
+            password: await bcryptjs.hash(process.env.DEFAULT_ADMIN_PASSWORD, salt),
+            role_id: 1,
+            photo: faker.image.unsplash.people(),
+            email: process.env.DEFAULT_ADMIN_EMAIL,
+            email_verified_at: new Date(),
+        })
         for (let i = 0; i <= 5; i++) {
             const name = faker.name.firstName()
             const salt = await bcryptjs.genSalt(10)

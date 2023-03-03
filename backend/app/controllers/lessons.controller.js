@@ -7,21 +7,12 @@ const path = require("path")
 
 class LessonsController extends Controller {
     async index() {
-      try {
         // example call request and response
         const { request, response } = this
-        const rows = await models.lessons.findAll({
-            attributes: ["name", "description", "image"],
+        const data = await models.lessons.findAll({
+            attributes: ["id", "name", "description", "image"],
         })
-        
-        rows.forEach((row, i) => {
-          rows[i].image = parseURL(row.image)
-        })
-        
-        this.success(rows)
-      } catch (e) {
-        this.error(e.message)
-      }
+        this.success(data)
     }
     async findWithMateries() {
         const { request, response } = this
@@ -48,7 +39,7 @@ class LessonsController extends Controller {
     async findLesson() {
         const { request } = this
         const data = await models.lessons.findOne({
-            attributes: ["name", "image"],
+            attributes: ["name", "image", "description"],
             where: {
                 name: request.params.lesson,
             },
@@ -62,16 +53,6 @@ class LessonsController extends Controller {
     }
     async createLesson() {
         const { request, response } = this
-        //cek apalah ada error pada gambsr
-        if (request.imageError) {
-            return this.error("", request.imageError, 400)
-        }
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            removeFile(request.file.path)
-            return this.error(errors)
-        }
-        //  console.log(request.file)
         const { name, description } = request.body
         const image = request.file?.filename || "default.jpg"
         const isExist = await this.existLesson(name)
@@ -79,7 +60,7 @@ class LessonsController extends Controller {
             if (request.file) {
                 removeFile(request.file.path)
             }
-            return this.error("Lesson Telah Ada")
+            return this.error("", "Lesson Telah Ada", 400)
         }
         try {
             const data = await models.lessons.create({
@@ -87,7 +68,7 @@ class LessonsController extends Controller {
                 description,
                 image,
             })
-            return this.success(data, "Berhasil menambahkan lessson baru ")
+            return this.success(data, "Berhasil menambahkan lessson baru ", 201)
         } catch (err) {
             if (request.file) {
                 removeFile(request.file.path)
@@ -107,16 +88,16 @@ class LessonsController extends Controller {
     }
     async delete() {
         const { name } = this.request.params
-        if (!name) return this.error("", "nama lesson tidak ada !")
+        if (!name) return this.error("", "nama lesson tidak ada !", 400)
         try {
             const oldData = await models.lessons.findOne({
                 where: { name },
             })
-            if (!oldData) return this.error("", "lesson tidak ada")
+            if (!oldData) return this.error("", "lesson tidak ada", 404)
             await models.lessons.destroy({
                 where: { name },
             })
-            ;("../../public/images/lessons")
+                ; ("../../public/images/lessons")
             removeFile(
                 path.join(
                     __dirname,
@@ -136,15 +117,6 @@ class LessonsController extends Controller {
     }
     async update() {
         const { request, response } = this
-        if (request.imageError) {
-            return this.error("", request.imageError, 400)
-        }
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            removeFile(request.file.path)
-            return this.error(errors)
-        }
-        //  console.log(request.file)
         const { name } = request.params
         const oldData = await models.lessons.findOne({
             where: {
@@ -185,18 +157,20 @@ class LessonsController extends Controller {
                 }
             )
 
-            // hapus gambar lama
-            removeFile(
-                path.join(
-                    __dirname,
-                    "..",
-                    "..",
-                    "public",
-                    "images",
-                    "lessons",
-                    oldData.image
+            // hapus gambar lama jika ada gambar baru
+            if (oldData.image != image) {
+                removeFile(
+                    path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "public",
+                        "images",
+                        "lessons",
+                        oldData.image
+                    )
                 )
-            )
+            }
             return this.success("", "berhasil di update")
         } catch (err) {
             console.log("update error", err)

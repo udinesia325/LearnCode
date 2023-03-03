@@ -10,10 +10,6 @@ require("dotenv").config()
 class AuthController extends Controller {
     async login() {
         const { request } = this
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            return this.error(errors)
-        }
         const { email, password } = request.body
         const user = await models.users.findOne({
             where: {
@@ -41,16 +37,6 @@ class AuthController extends Controller {
     async register() {
         const { request } = this
         //cek apalah ada error pada gambsr
-        if (request.imageError) {
-            return this.error("", request.imageError, 400)
-        }
-        const errors = validationResult(request)
-        if (!errors.isEmpty()) {
-            if (request.file) {
-                removeFile(request.file.path)
-            }
-            return this.error(errors)
-        }
         const { name, email, password } = request.body
         const uid = Math.random(+new Date())
             .toString(16)
@@ -78,10 +64,6 @@ class AuthController extends Controller {
     }
     async verify() {
         const { uid } = this.request.params
-        const errors = validationResult(this.request)
-        if (!errors.isEmpty()) {
-            return this.error(errors)
-        }
         try {
             await models.users.update(
                 {
@@ -116,6 +98,9 @@ class AuthController extends Controller {
             console.log("find all user error", err)
             return this.error("", "internal server error")
         }
+    }
+    async me() {
+        return this.success(this.request.user)
     }
 }
 

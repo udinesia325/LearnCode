@@ -23,7 +23,7 @@ export default function Document() {
                 ></script>
                 <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-fountain@2/tsparticles.preset.fountain.bundle.min.js"></script>
             </Head>
-            <body>
+            <body className="bg-light">
                 <Main />
                 <NextScript />
             </body>

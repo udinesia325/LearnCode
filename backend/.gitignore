@@ -4,3 +4,6 @@
 .env.test.local
 .env.production.local
 .env.local
+
+/public/images/lessons/
+/public/images/users/

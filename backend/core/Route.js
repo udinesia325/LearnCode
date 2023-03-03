@@ -18,6 +18,9 @@ const fileUploader = require("../app/helpers/fileUploader")
 const fileSizeLimiter = require("../app/middleware/fileSizeLimiter")
 const registerValidation = require("../app/middleware/registerValidation")
 const uidExist = require("../app/middleware/uidExist")
+const DashboardController = require("../app/controllers/dashboard.controller")
+const updateMateriValidation = require("../app/middleware/updateMateriValidation")
+const validationChecker = require("../app/middleware/validationChecker")
 
 const router = Express.Router()
 class Route {
@@ -26,6 +29,10 @@ class Route {
             this.get("/", (req, res, next) =>
                 new ExampleController(req, res, next).index()
             ),
+            this.get(
+                "/dashboard",
+                (req, res, next) => new DashboardController(req, res, next)
+            ),
             this.get("/materies", (req, res, next) =>
                 new MateriesController(req, res, next).allMateries()
             ),
@@ -33,6 +40,7 @@ class Route {
                 "/materies",
                 decodeToken,
                 createMateriValidation,
+                validationChecker,
                 (req, res, next) =>
                     new MateriesController(req, res, next).create()
             ),
@@ -49,7 +57,8 @@ class Route {
             this.patch(
                 "/materies/:slug",
                 decodeToken,
-                createMateriValidation,
+                updateMateriValidation,
+                validationChecker,
                 (req, res, next) =>
                     new MateriesController(req, res, next).update()
             ),
@@ -75,6 +84,7 @@ class Route {
                 fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
+                validationChecker,
                 (req, res, next) =>
                     new LessonsController(req, res, next).createLesson()
             ),
@@ -84,10 +94,11 @@ class Route {
                 fileUploader("lessons").single("image"),
                 fileSizeLimiter,
                 createLessonValidation,
+                validationChecker,
                 (req, res, next) =>
                     new LessonsController(req, res, next).update()
             ),
-            this.post("/auth/login", loginValidation, (req, res, next) =>
+            this.post("/auth/login", loginValidation, validationChecker, (req, res, next) =>
                 new AuthController(req, res, next).login()
             ),
             this.post(
@@ -95,6 +106,7 @@ class Route {
                 fileUploader("users").single("photo"),
                 fileSizeLimiter,
                 registerValidation,
+                validationChecker,
                 (req, res, next) =>
                     new AuthController(req, res, next).register()
             ),
@@ -108,6 +120,7 @@ class Route {
             this.get("/auth/users", decodeToken, adminOnly, (req, res, next) =>
                 new AuthController(req, res, next).index()
             ),
+            this.post("/auth/me", decodeToken, (req, res, next) => new AuthController(req, res, next).me())
         ]
     }
 
