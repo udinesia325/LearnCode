@@ -20,7 +20,7 @@
 - lakukan hal yang sama untuk folder backend
 
 ## penggunaan
-- pastikan anda berhasil menjalankan backend terlebih dahulu , anda bisa membaca petunjuk nya [disini](backend/Readme.md)
+- pastikan anda berhasil menjalankan backend terlebih dahulu , anda bisa membaca petunjuk nya [disini](https://github.com/udinesia325/LearnCode/blob/dev/backend/README.md)
 - setelah backend berjalan, anda bisa berpindah ke frontend dan jalankan perintah
     ```sh
     npm run dev
