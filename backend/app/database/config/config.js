@@ -2,24 +2,24 @@ const env = require("../../helpers/env")
 
 module.exports = {
     development: {
-        username: env("DB_USERNAME"),
-        password: env("DB_PASSWORD"),
-        database: env("DB_NAME"),
-        host: env("DB_HOST"),
-        dialect: "mysql",
+        username: env("DB_USERNAME", "root"),
+        password: env("DB_PASSWORD", ""),
+        database: env("DB_NAME", "learncode_backend"),
+        host: env("DB_HOST", "localhost"),
+        dialect: env("DB_DRIVER", "mysql"),
     },
     test: {
-        username: "root",
-        password: null,
-        database: "database_test",
-        host: "127.0.0.1",
-        dialect: "mysql",
+        username: env("DB_USERNAME", "root"),
+        password: env("DB_PASSWORD", ""),
+        database: env("DB_NAME", "learncode_backend"),
+        host: env("DB_HOST", "localhost"),
+        dialect: env("DB_DRIVER", "mysql"),
     },
     production: {
-        username: "root",
-        password: null,
-        database: "database_production",
-        host: "127.0.0.1",
-        dialect: "mysql",
-    },
+        username: env("DB_USERNAME"),
+        password: env("DB_PASSWORD", ""),
+        database: env("DB_NAME"),
+        host: env("DB_HOST"),
+        dialect: env("DB_DRIVER", "mysql"),
+    }
 }

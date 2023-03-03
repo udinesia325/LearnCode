@@ -1,5 +1,6 @@
 const Controller = require("cores/Controller")
 const { validationResult } = require("express-validator")
+const { parseURL } = require('helpers/formatter');
 const models = require("models")
 const removeFile = require("../helpers/removeFile")
 const path = require("path")
